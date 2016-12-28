@@ -1,5 +1,7 @@
 package db;
 
+import other.Config;
+
 import javax.swing.plaf.nimbus.State;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,12 +18,6 @@ public class DBService {
 
     private static final String JDBC = "jdbc";
     private static final String MYSQL = "mysql";
-    private static final String DBMS_URL = "127.0.0.1";
-    private static final String DBMS_PORT = "2333";
-    private static final String DB_NAME = "student_manager";
-
-    private static final String DBMS_USERNAME = "root";
-    private static final String DBMS_PASSWD = "qiaoyunrui1995";
 
     private Connection mConn = null;
     private Statement mState = null;
@@ -41,7 +37,7 @@ public class DBService {
         try {
             Class.forName(MY_SQL_DRIVER_CLASS);
             mConn = DriverManager
-                    .getConnection(getURL(), DBMS_USERNAME, DBMS_PASSWD);
+                    .getConnection(getURL(), Config.DBMS_USERNAME, Config.DBMS_PASSWD);
             mState = mConn.createStatement();
         } catch (ClassNotFoundException e) {
             throw new Exception("数据库驱动异常（可能是没有导入数据库驱动）： " + e.getMessage());
@@ -80,8 +76,8 @@ public class DBService {
      * @return
      */
     public String getURL() {
-        return JDBC + ":" + MYSQL + "://" + DBMS_URL + ":" + DBMS_PORT +
-                "/" + DB_NAME;
+        return JDBC + ":" + MYSQL + "://" + Config.DBMS_URL + ":" + Config.DBMS_PORT +
+                "/" + Config.DB_NAME;
     }
 
 }
