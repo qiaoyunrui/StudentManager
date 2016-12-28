@@ -26,6 +26,14 @@ public class DBService {
     private Connection mConn = null;
     private Statement mState = null;
 
+    private final static class DBServiceHolder {
+        private static final DBService sInstance = new DBService();
+    }
+
+    public static DBService getInstance() {
+        return DBServiceHolder.sInstance;
+    }
+
     /**
      * 连接数据库
      */
