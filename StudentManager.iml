@@ -21,7 +21,7 @@
                 <option name="metaInfo" value="false" />
                 <option name="kjsm" value="false" />
                 <option name="target" />
-                <option name="moduleKind" />
+                <option name="moduleKind" value="plain" />
                 <option name="main" />
                 <option name="outputPrefix" />
                 <option name="outputPostfix" />
@@ -85,5 +85,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.1.40-bin" level="project" />
   </component>
 </module>

@@ -11,6 +11,8 @@ public class Course {
 
     private String desc;
 
+    private int selected;    //已选人数
+
     private int capacity;   //容量
 
     private String term;    //学期
@@ -19,10 +21,12 @@ public class Course {
         this.no = no;
     }
 
-    public Course(String no, String name, String desc, int capacity, String term) {
+    public Course(String no, String name, String desc, int capacity,
+                  String term, int selected) {
         this(no);
         this.name = name;
         this.desc = desc;
+        this.selected = selected;
         this.capacity = capacity;
         this.term = term;
     }
@@ -57,5 +61,13 @@ public class Course {
 
     public void setTerm(String term) {
         this.term = term;
+    }
+
+    public int getSelected() {
+        return selected;
+    }
+
+    public void setSelected(int selected) {
+        this.selected = selected;
     }
 }
