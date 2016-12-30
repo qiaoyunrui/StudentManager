@@ -32,4 +32,13 @@ public class Teacher extends User {
     public void setSex(String sex) {
         this.sex = sex;
     }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "no='" + no + '\'' +
+                "name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                '}';
+    }
 }

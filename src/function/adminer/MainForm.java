@@ -1,4 +1,4 @@
-package function.administrator;
+package function.adminer;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
@@ -14,10 +14,11 @@ import java.awt.*;
  */
 public class MainForm extends JFrame {
     private JPanel mPanelRoot;
-    private JButton mBtnAddUser;
+    private JButton mBtnAddTeacher;
     private JButton mBtnQuery;
     private JLabel mLabelBoard;
     private JButton mBtnSignOut;
+    private JButton mBtnAddStudent;
 
     private int height = 300;
     private int width = 400;
@@ -37,19 +38,50 @@ public class MainForm extends JFrame {
     }
 
     private void initEvent() {
-        mBtnAddUser.addActionListener(e -> {
-
+        mBtnAddTeacher.addActionListener(e -> {
+            turn2AddTeacherAct();
+        });
+        mBtnAddStudent.addActionListener(e -> {
+            turn2AddStudentAct();
         });
         mBtnQuery.addActionListener(e -> {
-
+            turn2QueryAct();
         });
         mBtnSignOut.addActionListener(e -> {
-
+            turn2SignInAct();
         });
     }
 
     public static void main(String[] args) {
         MainForm mainForm = new MainForm();
+    }
+
+    /**
+     * 跳转到添加用户界面
+     */
+    private void turn2AddTeacherAct() {
+
+    }
+
+    /**
+     * 跳转到添加学生界面
+     */
+    private void turn2AddStudentAct() {
+
+    }
+
+    /**
+     * 跳转到查询成绩界面
+     */
+    private void turn2QueryAct() {
+
+    }
+
+    /**
+     * 跳转到登录界面
+     */
+    private void turn2SignInAct() {
+
     }
 
     {
@@ -68,21 +100,21 @@ public class MainForm extends JFrame {
      */
     private void $$$setupUI$$$() {
         mPanelRoot = new JPanel();
-        mPanelRoot.setLayout(new GridLayoutManager(4, 3, new Insets(10, 10, 10, 10), -1, -1));
+        mPanelRoot.setLayout(new GridLayoutManager(5, 3, new Insets(10, 10, 10, 10), -1, -1));
         mPanelRoot.setFont(new Font(mPanelRoot.getFont().getName(), mPanelRoot.getFont().getStyle(), mPanelRoot.getFont().getSize()));
         mPanelRoot.putClientProperty("html.disable", Boolean.FALSE);
         mLabelBoard = new JLabel();
         mLabelBoard.setFont(new Font(mLabelBoard.getFont().getName(), mLabelBoard.getFont().getStyle(), 18));
         mLabelBoard.setText("欢迎你，管理员！");
         mPanelRoot.add(mLabelBoard, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        mBtnAddUser = new JButton();
-        mBtnAddUser.setFont(new Font(mBtnAddUser.getFont().getName(), mBtnAddUser.getFont().getStyle(), 18));
-        mBtnAddUser.setText("添加学生或者教师账号");
-        mPanelRoot.add(mBtnAddUser, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mBtnAddTeacher = new JButton();
+        mBtnAddTeacher.setFont(new Font(mBtnAddTeacher.getFont().getName(), mBtnAddTeacher.getFont().getStyle(), 18));
+        mBtnAddTeacher.setText("添加教师账号");
+        mPanelRoot.add(mBtnAddTeacher, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         mBtnQuery = new JButton();
         mBtnQuery.setFont(new Font(mBtnQuery.getFont().getName(), mBtnQuery.getFont().getStyle(), 18));
         mBtnQuery.setText("查询或修改成绩");
-        mPanelRoot.add(mBtnQuery, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mPanelRoot.add(mBtnQuery, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer1 = new Spacer();
         mPanelRoot.add(spacer1, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final Spacer spacer2 = new Spacer();
@@ -90,7 +122,11 @@ public class MainForm extends JFrame {
         mBtnSignOut = new JButton();
         mBtnSignOut.setFont(new Font(mBtnSignOut.getFont().getName(), mBtnSignOut.getFont().getStyle(), 18));
         mBtnSignOut.setText("退出登录");
-        mPanelRoot.add(mBtnSignOut, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mPanelRoot.add(mBtnSignOut, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mBtnAddStudent = new JButton();
+        mBtnAddStudent.setFont(new Font(mBtnAddStudent.getFont().getName(), mBtnAddStudent.getFont().getStyle(), 18));
+        mBtnAddStudent.setText("添加学生账号");
+        mPanelRoot.add(mBtnAddStudent, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
