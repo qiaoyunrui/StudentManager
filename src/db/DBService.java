@@ -16,8 +16,8 @@ public class DBService {
 
     private static final String MY_SQL_DRIVER_CLASS = "com.mysql.jdbc.Driver";
 
-    private static final String JDBC = "jdbc";
     private static final String MYSQL = "mysql";
+    private static final String JDBC = "jdbc";
 
     private Connection mConn = null;
     private Statement mState = null;
@@ -42,7 +42,7 @@ public class DBService {
         } catch (ClassNotFoundException e) {
             throw new Exception("数据库驱动异常（可能是没有导入数据库驱动）： " + e.getMessage());
         } catch (SQLException e) {
-            throw new Exception("数据库连接异常： " + e.getSQLState());
+            throw new Exception("数据库连接异常： " + e.getMessage());
         }
     }
 
