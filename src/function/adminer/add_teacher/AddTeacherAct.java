@@ -5,6 +5,7 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import data.user.Teacher;
 import kotlin.Pair;
+import util.JFrameUtilKt;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,6 +34,7 @@ public class AddTeacherAct extends JFrame {
         super("添加教师账号");
         this.mPresenter = presenter;
         setContentPane(mPanelRoot);
+        JFrameUtilKt.init(this);    //调用kotlin中的扩展方法
         initEvent();
     }
 
