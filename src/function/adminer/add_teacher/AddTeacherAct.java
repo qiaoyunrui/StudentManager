@@ -8,8 +8,6 @@ import kotlin.Pair;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by qiao1 on 2016/12/30.
@@ -35,15 +33,7 @@ public class AddTeacherAct extends JFrame {
         super("添加教师账号");
         this.mPresenter = presenter;
         setContentPane(mPanelRoot);
-        setSize(width, height);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        Dimension dimension = Toolkit.getDefaultToolkit()
-                .getScreenSize();
-        setLocation((int) dimension.getWidth() / 2 - width / 2,
-                (int) dimension.getHeight() / 2 - height / 2);
-
         initEvent();
-        setVisible(true);
     }
 
     private void initEvent() {
