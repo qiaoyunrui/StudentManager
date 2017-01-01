@@ -4,6 +4,7 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import util.JFrameUtilKt;
+import util.StackFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +14,7 @@ import java.awt.*;
  * <p>
  * Created by qiao1 on 2016/12/29.
  */
-public class MainForm extends JFrame {
+public class MainForm extends StackFrame {
     private JPanel mPanelRoot;
     private JButton mBtnAddTeacher;
     private JButton mBtnQuery;

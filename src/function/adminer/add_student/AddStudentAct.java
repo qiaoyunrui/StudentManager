@@ -7,7 +7,9 @@ import data.user.Student;
 import function.adminer.add_teacher.AddTeacherAct;
 import function.adminer.add_teacher.AddTeacherPresenter;
 import kotlin.Pair;
+import org.jetbrains.annotations.NotNull;
 import util.JFrameUtilKt;
+import util.StackFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +17,7 @@ import java.awt.*;
 /**
  * Created by qiao1 on 2017/1/1.
  */
-public class AddStudentAct extends JFrame {
+public class AddStudentAct extends StackFrame {
     private JTextField mTfNo;
     private JTextField mTfName;
     private JTextField mTfSex;
@@ -59,8 +61,13 @@ public class AddStudentAct extends JFrame {
     }
 
     private void turn2AdminMainAct() {
-        mPresenter.closeDB();
         dispose();  //关闭本界面
+    }
+
+    @Override
+    public void onDispose() {
+        mPresenter.closeDB();
+        super.onDispose();
     }
 
     public static void main(String[] args) {

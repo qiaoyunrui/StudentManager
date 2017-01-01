@@ -6,6 +6,7 @@ import com.intellij.uiDesigner.core.Spacer;
 import data.user.Teacher;
 import kotlin.Pair;
 import util.JFrameUtilKt;
+import util.StackFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +14,7 @@ import java.awt.*;
 /**
  * Created by qiao1 on 2016/12/30.
  */
-public class AddTeacherAct extends JFrame {
+public class AddTeacherAct extends StackFrame {
 
     private JTextField mTfNo;
     private JTextField mTfName;
