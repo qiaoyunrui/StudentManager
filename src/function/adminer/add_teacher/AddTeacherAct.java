@@ -25,9 +25,6 @@ public class AddTeacherAct extends JFrame {
 
     private AddTeacherPresenter mPresenter;
 
-    private int height = 300;
-    private int width = 400;
-
     private Teacher mTeacher;
 
     public AddTeacherAct(AddTeacherPresenter presenter) {
@@ -69,7 +66,8 @@ public class AddTeacherAct extends JFrame {
      * 跳转到管理员主界面
      */
     private void turn2AdminMainAct() {
-        this.dispose(); //关闭本界面
+        mPresenter.closeDB();
+        dispose(); //关闭本界面
     }
 
     public static void main(String[] args) {
