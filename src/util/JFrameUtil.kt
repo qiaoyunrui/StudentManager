@@ -8,11 +8,11 @@ import javax.swing.WindowConstants
  * Created by qiao1 on 2016/12/31.
  */
 
-var JFrame.height: Int
+var JFrame.mHeight: Int
     get() = 300
     set(value) {}
 
-var JFrame.width: Int
+var JFrame.mWidth: Int
     get() = 400
     set(value) {}
 
@@ -27,5 +27,5 @@ fun JFrame.init(height: Int, width: Int) {
 }
 
 fun JFrame.init() {
-    init(height, width)
+    init(mHeight, mWidth)
 }
