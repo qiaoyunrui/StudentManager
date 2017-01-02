@@ -100,7 +100,7 @@
               </component>
             </children>
           </grid>
-          <component id="87679" class="javax.swing.JList" binding="mList">
+          <component id="6eacf" class="javax.swing.JList" binding="mList">
             <constraints border-constraint="Center"/>
             <properties/>
           </component>

@@ -3,12 +3,15 @@ package function.adminer.query_grade;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import component.QueryGradeRanderer;
 import data.Grade;
 import util.JFrameUtilKt;
 import util.StackFrame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Vector;
 
 /**
@@ -22,6 +25,9 @@ public class QueryGradeAct extends StackFrame {
     private JButton mBtnSearch;
     private JTextField mTfContent;
     private JButton mBtnBack;
+    private String key;
+
+    private Vector<Grade> mData;
 
     public QueryGradeAct(QueryGradePresenter presenter) {
         super("查询或修改学生成绩");
@@ -32,15 +38,39 @@ public class QueryGradeAct extends StackFrame {
     }
 
     private void initEvent() {
-        mBtnBack.addActionListener(action -> {
-            dispose();
-        });
+        mList.setFixedCellWidth(getWidth());
+        mList.setFixedCellHeight(getHeight() / 20);
+        mList.setCellRenderer(new QueryGradeRanderer());
+        mBtnBack.addActionListener(action -> dispose());
         mBtnSearch.addActionListener(action -> {
-            String key = mTfContent.getText();
+            key = mTfContent.getText();
             if (key != null && !key.trim().equals("")) {
                 setData(mPresenter.search(key));
             } else {
                 JOptionPane.showMessageDialog(this, "请输入内容后进行搜索！");
+            }
+        });
+        mList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (mList.getSelectedIndex() != -1) {
+                    if (e.getClickCount() == 2) {    //双击
+                        if (mData != null) {
+                            String new_score = JOptionPane.showInputDialog("请输入新的成绩：", mData.get(mList.getSelectedIndex()).getScore());
+                            if (new_score == null || new_score.trim().equals(""))
+                                return;
+                            int result_code = mPresenter.changeScore(new_score,
+                                    mData.get(mList.getSelectedIndex()).getStudentNo(),
+                                    mData.get(mList.getSelectedIndex()).getCourseNo());
+                            if (result_code == 0) {
+                                JOptionPane.showMessageDialog(QueryGradeAct.this, "修改成功！");
+                                setData(mPresenter.search(key));    //更新数据
+                            } else {
+                                JOptionPane.showMessageDialog(QueryGradeAct.this, "修改失败！");
+                            }
+                        }
+                    }
+                }
             }
         });
     }
@@ -51,6 +81,7 @@ public class QueryGradeAct extends StackFrame {
      * @param data
      */
     public void setData(Vector<Grade> data) {
+        mData = data;
         mList.setListData(data);
     }
 

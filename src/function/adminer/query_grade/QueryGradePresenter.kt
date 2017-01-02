@@ -95,8 +95,21 @@ class QueryGradePresenter {
                 to.add(i)
             }
         }
-        to.forEach(::println)
+//        to.forEach(::println)
         return to
+    }
+
+    fun changeScore(new_score: String, student_no: String, course_no: String): Int {
+        var sql = "UPDATE grade SET Score = ${new_score} WHERE Sno = ${student_no} AND Cno = ${course_no};"
+        var result_code = -1
+        try {
+            if (mStatement?.executeUpdate(sql)!! > 0) {
+                result_code = 0
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return result_code
     }
 
     fun closeDB() {
