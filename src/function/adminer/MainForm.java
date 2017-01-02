@@ -3,6 +3,8 @@ package function.adminer;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import util.JFrameUtilKt;
+import util.StackFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +14,7 @@ import java.awt.*;
  * <p>
  * Created by qiao1 on 2016/12/29.
  */
-public class MainForm extends JFrame {
+public class MainForm extends StackFrame {
     private JPanel mPanelRoot;
     private JButton mBtnAddTeacher;
     private JButton mBtnQuery;
@@ -26,15 +28,8 @@ public class MainForm extends JFrame {
     public MainForm() {
         super("学生成绩管理系统-管理员");
         setContentPane(mPanelRoot);
-        setSize(width, height);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        Dimension dimension = Toolkit.getDefaultToolkit()
-                .getScreenSize();
-        setLocation((int) dimension.getWidth() / 2 - width / 2,
-                (int) dimension.getHeight() / 2 - height / 2);
+        JFrameUtilKt.init(this);
         initEvent();
-
-        setVisible(true);
     }
 
     private void initEvent() {

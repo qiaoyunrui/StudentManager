@@ -5,16 +5,16 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import data.user.Teacher;
 import kotlin.Pair;
+import util.JFrameUtilKt;
+import util.StackFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by qiao1 on 2016/12/30.
  */
-public class AddTeacherAct extends JFrame {
+public class AddTeacherAct extends StackFrame {
 
     private JTextField mTfNo;
     private JTextField mTfName;
@@ -26,24 +26,14 @@ public class AddTeacherAct extends JFrame {
 
     private AddTeacherPresenter mPresenter;
 
-    private int height = 300;
-    private int width = 400;
-
     private Teacher mTeacher;
 
     public AddTeacherAct(AddTeacherPresenter presenter) {
         super("添加教师账号");
         this.mPresenter = presenter;
         setContentPane(mPanelRoot);
-        setSize(width, height);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        Dimension dimension = Toolkit.getDefaultToolkit()
-                .getScreenSize();
-        setLocation((int) dimension.getWidth() / 2 - width / 2,
-                (int) dimension.getHeight() / 2 - height / 2);
-
+        JFrameUtilKt.init(this);    //调用kotlin中的扩展方法
         initEvent();
-        setVisible(true);
     }
 
     private void initEvent() {
@@ -77,7 +67,8 @@ public class AddTeacherAct extends JFrame {
      * 跳转到管理员主界面
      */
     private void turn2AdminMainAct() {
-        this.dispose(); //关闭本界面
+        mPresenter.closeDB();
+        dispose(); //关闭本界面
     }
 
     public static void main(String[] args) {
