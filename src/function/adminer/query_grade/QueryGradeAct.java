@@ -9,6 +9,7 @@ import util.StackFrame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Vector;
 
 /**
  * Created by qiao1 on 2017/1/1.
@@ -37,11 +38,20 @@ public class QueryGradeAct extends StackFrame {
         mBtnSearch.addActionListener(action -> {
             String key = mTfContent.getText();
             if (key != null && !key.trim().equals("")) {
-                mPresenter.search(key);
+                setData(mPresenter.search(key));
             } else {
                 JOptionPane.showMessageDialog(this, "请输入内容后进行搜索！");
             }
         });
+    }
+
+    /**
+     * 为列表项设置数据
+     *
+     * @param data
+     */
+    public void setData(Vector<Grade> data) {
+        mList.setListData(data);
     }
 
     @Override
