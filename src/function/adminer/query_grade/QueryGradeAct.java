@@ -56,7 +56,8 @@ public class QueryGradeAct extends StackFrame {
                 if (mList.getSelectedIndex() != -1) {
                     if (e.getClickCount() == 2) {    //双击
                         if (mData != null) {
-                            String new_score = JOptionPane.showInputDialog("请输入新的成绩：", mData.get(mList.getSelectedIndex()).getScore());
+                            String new_score = JOptionPane.showInputDialog("请输入新的成绩：",
+                                    mData.get(mList.getSelectedIndex()).getScore());
                             if (new_score == null || new_score.trim().equals(""))
                                 return;
                             int result_code = mPresenter.changeScore(new_score,

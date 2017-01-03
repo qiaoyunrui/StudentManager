@@ -70,4 +70,8 @@ public class Course {
     public void setSelected(int selected) {
         this.selected = selected;
     }
+
+    public String getNo() {
+        return no;
+    }
 }

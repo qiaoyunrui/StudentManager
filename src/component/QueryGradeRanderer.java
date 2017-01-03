@@ -19,10 +19,8 @@ public class QueryGradeRanderer extends JPanel implements ListCellRenderer<Grade
     private JLabel mLabelCourseDesc;
     private JLabel mLabelTeachers;
     private JLabel mLabelScore;
-    private Border mBorder;
 
     public QueryGradeRanderer() {
-        mBorder = BorderFactory.createEmptyBorder();
         setLayout(new GridLayout(1, 8, 1, 1));
         mLabelStudentNo = new JLabel();
         add(mLabelStudentNo);

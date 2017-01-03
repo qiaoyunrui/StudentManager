@@ -3,12 +3,18 @@ package function.adminer.add_course;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import data.Course;
+import data.user.Teacher;
+import function.adminer.add_course.select_teacher.SelectTeacherAct;
+import function.adminer.add_course.select_teacher.SelectTeacherPresenter;
+import kotlin.Pair;
 import org.jetbrains.annotations.NotNull;
 import util.JFrameUtilKt;
 import util.StackFrame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Vector;
 
 /**
  * Created by qiao1 on 2017/1/2.
@@ -25,6 +31,8 @@ public class AddCourseAct extends StackFrame {
     private JLabel mLabelTeachers;
     private JPanel mPanelRoot;
 
+    private Vector<Teacher> selected;
+
     private AddCoursePresenter mPresenter;
 
     public AddCourseAct(AddCoursePresenter presenter) {
@@ -37,6 +45,68 @@ public class AddCourseAct extends StackFrame {
 
     private void initEvent() {
         mBtnCancel.addActionListener(l -> dispose());
+        mBtnAddTeacher.addActionListener(l -> {
+            openSelectTeacherAct();
+        });
+        mBtnPublish.addActionListener(l -> {
+            if (mPresenter.addCourse(getInputInfo()) == 0) {
+                JOptionPane.showMessageDialog(this, "发布课程成功!");
+            } else {
+                JOptionPane.showMessageDialog(this, "无法发布此课程！");
+            }
+        });
+    }
+
+    private SelectTeacherAct mSelectTeacherAct;
+
+    private void openSelectTeacherAct() {
+        mSelectTeacherAct = new SelectTeacherAct(new SelectTeacherPresenter());
+        hide();
+    }
+
+    @Override
+    public void onOtherDispose(@NotNull StackFrame stackFrame) {
+        super.onOtherDispose(stackFrame);
+        if (stackFrame == mSelectTeacherAct) {  //如果是SelectTeacherAct
+            show();
+        }
+    }
+
+    @Override
+    public void onSubmitData(int submit_code, @NotNull Object data, @NotNull StackFrame submiter) {
+        super.onSubmitData(submit_code, data, submiter);
+        if (submit_code == 0x123) {  //是选择教师界面传来的信息
+            selected = (Vector<Teacher>) data;
+            showSelectedTeachers(selected);
+        }
+    }
+
+    /**
+     * 获获取输入信息
+     */
+    private Pair<Course, Vector<Teacher>> getInputInfo() {
+        Course course = new Course(mTfCourseNo.getText(),
+                mTfCoursename.getText(),
+                mTaDesc.getText(),
+                Integer.parseInt(mTfCapacity.getText()),
+                mTfTerm.getText(),
+                0);
+        Pair<Course, Vector<Teacher>> pair =
+                new Pair<Course, Vector<Teacher>>(course, selected);
+        return pair;
+    }
+
+    /**
+     * 显示被选择的教师
+     *
+     * @param selected
+     */
+    private void showSelectedTeachers(Vector<Teacher> selected) {
+        String show = "";
+        for (Teacher teacher : selected) {
+            show = show + "(" + teacher.getNo() + "、" + teacher.getName() + "、" + teacher.getSex() + ") ";
+        }
+        mLabelTeachers.setText(show);
     }
 
     public static void main(String[] args) {
