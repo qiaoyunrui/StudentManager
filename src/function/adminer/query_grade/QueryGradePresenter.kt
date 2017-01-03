@@ -25,7 +25,6 @@ class QueryGradePresenter {
     private var result: Vector<Grade> = Vector<Grade>()
 
     fun search(key: String): Vector<Grade> {
-
         return result
     }
 
