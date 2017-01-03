@@ -8,10 +8,10 @@ import data.user.abs.User;
  */
 public class UserService {
 
-    private final static int TYPE_NONE = 0x03;
-    private final static int TYPE_STUDENT = 0x00;
-    private final static int TYPE_TEACHER = 0x01;
-    private final static int TYPE_ADMINER = 0x02;
+    public final static int TYPE_NONE = 0x03;
+    public final static int TYPE_STUDENT = 0x00;
+    public final static int TYPE_TEACHER = 0x01;
+    public final static int TYPE_ADMINER = 0x02;
 
     private static final class UserServiceHolder {
         private static UserService sInstance = new UserService();
