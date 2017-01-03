@@ -49,6 +49,9 @@ public class Main extends StackFrame {
     private void initEvent() {
         mBtnChangePasswd.addActionListener(l -> {
             String new_passwd = JOptionPane.showInputDialog("请输入新的密码：");
+            if (new_passwd == null) {
+                return;
+            }
             if (mPresenter.changePasswd(mService.getCurrentUser().getNo(), new_passwd) == 0) {
                 JOptionPane.showMessageDialog(this, "修改密码成功！");
             } else {
@@ -61,9 +64,13 @@ public class Main extends StackFrame {
         mBtnQueryGrade.addActionListener(l -> {
 
         });
-        mBtnChangePasswd.addActionListener(l -> {
-
+        mBtnInputGrade.addActionListener(l -> {
+            turn2InputGradeAct();
         });
+    }
+
+    private void turn2InputGradeAct() {
+
     }
 
     private void showTeacher(Teacher teacher) {
