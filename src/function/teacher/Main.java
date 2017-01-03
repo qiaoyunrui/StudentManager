@@ -3,6 +3,9 @@ package function.teacher;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import data.user.Teacher;
+import function.teacher.InputGrade.InputGradeAct;
+import function.teacher.InputGrade.InputGradePresenter;
+import org.jetbrains.annotations.NotNull;
 import user_service.UserService;
 import util.JFrameUtilKt;
 import util.StackFrame;
@@ -16,7 +19,6 @@ import java.awt.*;
 public class Main extends StackFrame {
     private JPanel mPanelRoot;
     private JButton mBtnInputGrade;
-    private JButton mBtnQueryGrade;
     private JButton mBtnSignOut;
     private JButton mBtnChangePasswd;
     private JLabel mLabelNo;
@@ -61,16 +63,24 @@ public class Main extends StackFrame {
         mBtnSignOut.addActionListener(l -> {
             dispose();
         });
-        mBtnQueryGrade.addActionListener(l -> {
-
-        });
         mBtnInputGrade.addActionListener(l -> {
             turn2InputGradeAct();
         });
     }
 
-    private void turn2InputGradeAct() {
+    private InputGradeAct mInputGradeAct;
 
+    @Override
+    public void onOtherDispose(@NotNull StackFrame stackFrame) {
+        super.onOtherDispose(stackFrame);
+        if (stackFrame == mInputGradeAct) {
+            show();
+        }
+    }
+
+    private void turn2InputGradeAct() {
+        mInputGradeAct = new InputGradeAct(new InputGradePresenter());
+        hide();
     }
 
     private void showTeacher(Teacher teacher) {
@@ -103,24 +113,20 @@ public class Main extends StackFrame {
         mPanelRoot = new JPanel();
         mPanelRoot.setLayout(new GridLayoutManager(1, 2, new Insets(10, 10, 10, 10), -1, -1));
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new GridLayoutManager(4, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panel1.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
         mPanelRoot.add(panel1, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         mBtnInputGrade = new JButton();
         mBtnInputGrade.setFont(new Font(mBtnInputGrade.getFont().getName(), mBtnInputGrade.getFont().getStyle(), 18));
         mBtnInputGrade.setText("录入成绩");
         panel1.add(mBtnInputGrade, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        mBtnQueryGrade = new JButton();
-        mBtnQueryGrade.setFont(new Font(mBtnQueryGrade.getFont().getName(), mBtnQueryGrade.getFont().getStyle(), 18));
-        mBtnQueryGrade.setText("查询/修改成绩");
-        panel1.add(mBtnQueryGrade, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         mBtnSignOut = new JButton();
         mBtnSignOut.setFont(new Font(mBtnSignOut.getFont().getName(), mBtnSignOut.getFont().getStyle(), 18));
         mBtnSignOut.setText("退出登录");
-        panel1.add(mBtnSignOut, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(mBtnSignOut, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         mBtnChangePasswd = new JButton();
         mBtnChangePasswd.setFont(new Font(mBtnChangePasswd.getFont().getName(), mBtnChangePasswd.getFont().getStyle(), 18));
         mBtnChangePasswd.setText("修改密码");
-        panel1.add(mBtnChangePasswd, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(mBtnChangePasswd, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JPanel panel2 = new JPanel();
         panel2.setLayout(new GridLayoutManager(4, 1, new Insets(0, 0, 0, 0), -1, -1));
         mPanelRoot.add(panel2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
