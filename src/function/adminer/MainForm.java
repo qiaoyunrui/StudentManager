@@ -3,11 +3,21 @@ package function.adminer;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import function.adminer.add_course.AddCourseAct;
+import function.adminer.add_course.AddCoursePresenter;
+import function.adminer.add_student.AddStudentAct;
+import function.adminer.add_student.AddStudentPresenter;
+import function.adminer.add_teacher.AddTeacherAct;
+import function.adminer.add_teacher.AddTeacherPresenter;
+import function.adminer.query_grade.QueryGradeAct;
+import function.adminer.query_grade.QueryGradePresenter;
+import org.jetbrains.annotations.NotNull;
 import util.JFrameUtilKt;
 import util.StackFrame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Stack;
 
 /**
  * 管理员的主界面
@@ -21,9 +31,12 @@ public class MainForm extends StackFrame {
     private JLabel mLabelBoard;
     private JButton mBtnSignOut;
     private JButton mBtnAddStudent;
+    private JButton mBtnAddCourse;
 
-    private int height = 300;
-    private int width = 400;
+    private StackFrame mAddStudentAct;
+    private StackFrame mAddTeacherAct;
+    private StackFrame mQueryGradeAct;
+    private StackFrame mAddCourseAct;
 
     public MainForm() {
         super("学生成绩管理系统-管理员");
@@ -45,6 +58,9 @@ public class MainForm extends StackFrame {
         mBtnSignOut.addActionListener(e -> {
             turn2SignInAct();
         });
+        mBtnAddCourse.addActionListener(e -> {
+            turn2AddCourseAct();
+        });
     }
 
     public static void main(String[] args) {
@@ -55,28 +71,47 @@ public class MainForm extends StackFrame {
      * 跳转到添加用户界面
      */
     private void turn2AddTeacherAct() {
-
+        mAddTeacherAct = new AddTeacherAct(new AddTeacherPresenter());
+        hide();
     }
 
     /**
      * 跳转到添加学生界面
      */
     private void turn2AddStudentAct() {
-
+        mAddStudentAct = new AddStudentAct(new AddStudentPresenter());
+        hide();
     }
 
     /**
      * 跳转到查询成绩界面
      */
     private void turn2QueryAct() {
+        mQueryGradeAct = new QueryGradeAct(new QueryGradePresenter());
+        hide();
+    }
 
+    private void turn2AddCourseAct() {
+        mAddCourseAct = new AddCourseAct(new AddCoursePresenter());
+        hide();
+    }
+
+    @Override
+    public void onOtherDispose(@NotNull StackFrame stackFrame) {
+        super.onOtherDispose(stackFrame);
+        if (stackFrame == mAddCourseAct ||
+                stackFrame == mAddStudentAct ||
+                stackFrame == mAddTeacherAct ||
+                stackFrame == mQueryGradeAct) {
+            show();
+        }
     }
 
     /**
      * 跳转到登录界面
      */
     private void turn2SignInAct() {
-
+        dispose();
     }
 
     {
@@ -95,7 +130,7 @@ public class MainForm extends StackFrame {
      */
     private void $$$setupUI$$$() {
         mPanelRoot = new JPanel();
-        mPanelRoot.setLayout(new GridLayoutManager(5, 3, new Insets(10, 10, 10, 10), -1, -1));
+        mPanelRoot.setLayout(new GridLayoutManager(6, 3, new Insets(10, 10, 10, 10), -1, -1));
         mPanelRoot.setFont(new Font(mPanelRoot.getFont().getName(), mPanelRoot.getFont().getStyle(), mPanelRoot.getFont().getSize()));
         mPanelRoot.putClientProperty("html.disable", Boolean.FALSE);
         mLabelBoard = new JLabel();
@@ -117,11 +152,15 @@ public class MainForm extends StackFrame {
         mBtnSignOut = new JButton();
         mBtnSignOut.setFont(new Font(mBtnSignOut.getFont().getName(), mBtnSignOut.getFont().getStyle(), 18));
         mBtnSignOut.setText("退出登录");
-        mPanelRoot.add(mBtnSignOut, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mPanelRoot.add(mBtnSignOut, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         mBtnAddStudent = new JButton();
         mBtnAddStudent.setFont(new Font(mBtnAddStudent.getFont().getName(), mBtnAddStudent.getFont().getStyle(), 18));
         mBtnAddStudent.setText("添加学生账号");
         mPanelRoot.add(mBtnAddStudent, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        mBtnAddCourse = new JButton();
+        mBtnAddCourse.setFont(new Font(mBtnAddCourse.getFont().getName(), mBtnAddCourse.getFont().getStyle(), 18));
+        mBtnAddCourse.setText("发布课程");
+        mPanelRoot.add(mBtnAddCourse, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
