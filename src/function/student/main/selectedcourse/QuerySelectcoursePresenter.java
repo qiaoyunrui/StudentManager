@@ -81,7 +81,9 @@ public class QuerySelectcoursePresenter {
                     .executeQuery("select Cno from grade where Sno = '" + sno + "' and Cno = '" + cno + "';");
             if (!rs.next()) {
                 if (mStatement.executeUpdate("update course set Cselected = Cselected + 1 where Cno = '" + cno + "'and Cselected < Ccapacity") > 0) {
-                    code = 0;
+//                    System.out.println("insert into grade values('" + sno + "','" + cno + "', null;");
+                    if (mStatement.executeUpdate("insert into grade values('" + sno + "','" + cno + "', null);") > 0)
+                        code = 0;
                 }
             }
         } catch (SQLException e) {
