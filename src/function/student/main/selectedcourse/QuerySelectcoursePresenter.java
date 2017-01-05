@@ -29,6 +29,7 @@ public class QuerySelectcoursePresenter {
     }
 
     public Vector search(String key) {
+
         String sql = "SELECT DISTINCT c.Cno," +
                 "c.Cname," +
                 "c.Cdesc," +
@@ -70,6 +71,22 @@ public class QuerySelectcoursePresenter {
             }
         }
         return res;
+    }
+
+    public int selectcourse(String sno, String cno){
+        int code = -1;
+        try {
+            ResultSet rs = mStatement
+                    .executeQuery("select Cno from grade where Sno = '" + sno + "' and Cno = '" + cno +"';");
+            if(!rs.next()){
+                if(mStatement.executeUpdate("update course set Cselected = Cselected + 1 where Cno = '" + cno + "'and Cselected < Ccapacity") > 0){
+                    code = 0;
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return code;
     }
 
     public void closeDB() {

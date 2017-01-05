@@ -23,8 +23,9 @@ public class QuerySelectcourseAct extends StackFrame {
     private JButton mBtnBack;
     private JList<CourseX> mList;
     private String key;
+    private String sno = "1407064241";
 
-    private Vector mData;
+    private Vector<CourseX> mData;
 
     public QuerySelectcourseAct(QuerySelectcoursePresenter presenter) {
         super("学生选课");
@@ -61,7 +62,15 @@ public class QuerySelectcourseAct extends StackFrame {
                 if (mList.getSelectedIndex() != -1) {
                     if (e.getClickCount() == 2) {
                         if (mData != null) {
-
+                            int i = JOptionPane.showConfirmDialog(null,"是否选择这门课程？");
+                            if(i == 0){
+                                int j = mPresenter.selectcourse(sno,mData.get(mList.getSelectedIndex()).getNo());
+                                if(j == 0){
+                                    JOptionPane.showMessageDialog(null,"选课成功");
+                                }else{
+                                    JOptionPane.showMessageDialog(null,"选课失败");
+                                }
+                            }
                         }
                     }
                 }
