@@ -67,6 +67,7 @@
                     </constraints>
                     <properties>
                       <font size="18"/>
+                      <text value=""/>
                     </properties>
                   </component>
                 </children>
@@ -100,8 +101,8 @@
               </component>
             </children>
           </grid>
-          <component id="6eacf" class="javax.swing.JList" binding="mList">
-            <constraints border-constraint="Center"/>
+          <component id="87679" class="javax.swing.JList" binding="mList">
+            <constraints border-constraint="West"/>
             <properties/>
           </component>
         </children>

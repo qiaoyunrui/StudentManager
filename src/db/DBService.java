@@ -16,8 +16,8 @@ public class DBService {
 
     private static final String MY_SQL_DRIVER_CLASS = "com.mysql.jdbc.Driver";
 
-    private static final String JDBC = "jdbc";
     private static final String MYSQL = "mysql";
+    private static final String JDBC = "jdbc";
 
     private Connection mConn = null;
     private Statement mState = null;
