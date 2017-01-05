@@ -43,9 +43,15 @@ class QueryGradePresenter {
     fun dealResultSet(result_set: ResultSet?): Vector<MiniGrade> {
         if (result_set != null) {
             while (result_set.next()) {
+                var score = ""
+                if (result_set.getString(3) == null) {
+                    score = "无"
+                } else {
+                    score = result_set.getString(3)
+                }
                 grades.add(MiniGrade(result_set.getString(1),
                         result_set.getString(2),
-                        result_set.getString(3)))
+                        score))
             }
         }
         return grades
