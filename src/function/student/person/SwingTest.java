@@ -1,6 +1,11 @@
 package function.student.person;
 
 import data.user.Student;
+import function.student.main.selectedcourse.QuerySelectcourseAct;
+import function.student.main.selectedcourse.QuerySelectcoursePresenter;
+import function.student.query_grade.QueryGradeAct;
+import function.student.query_grade.QueryGradePresenter;
+import user_service.UserService;
 import util.JFrameUtilKt;
 
 import javax.swing.*;
@@ -25,6 +30,8 @@ public class SwingTest {
     JButton done = new JButton("完成");
     JDialog d = new JDialog(f, "修改密码", true);
 
+    JButton mBtnQueryGrade = new JButton("查询成绩");
+    JButton mBtnSelectCourse = new JButton("选课");
 
     public SwingTest() {
         init();
@@ -35,7 +42,7 @@ public class SwingTest {
     ;
 
     private void initData() {
-        showData(selectStu.getStudentInfo("1407064241"));
+        showData(selectStu.getStudentInfo(UserService.getInstance().getCurrentUser().getNo()));
     }
 
     private void showData(Student student) {
@@ -64,6 +71,10 @@ public class SwingTest {
         bottom2.add(ret);
         f.add(bottom, BorderLayout.NORTH);
         f.add(bottom2, BorderLayout.SOUTH);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(mBtnQueryGrade);
+        buttonPanel.add(mBtnSelectCourse);
+        f.add(buttonPanel, BorderLayout.WEST);
         JPanel bottom3 = new JPanel();
         bottom3.add(bepass);
         bottom3.add(bepasswd);
@@ -73,6 +84,12 @@ public class SwingTest {
         bottom3.add(afpasswd2);
         d.add(bottom3);
         d.add(done, BorderLayout.SOUTH);
+        mBtnQueryGrade.addActionListener(l -> {
+            new QueryGradeAct(new QueryGradePresenter());
+        });
+        mBtnSelectCourse.addActionListener(l -> {
+            new QuerySelectcourseAct(new QuerySelectcoursePresenter());
+        });
         ret.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -89,7 +106,7 @@ public class SwingTest {
                     !new_passwd.equals(new_passwd_a)) {
                 JOptionPane.showMessageDialog(null, "无法修改密码！");
             }
-            if (selectStu.changePasswd("1407064241", old_passwd, new_passwd) == 0) {
+            if (selectStu.changePasswd(UserService.getInstance().getCurrentUser().getNo(), old_passwd, new_passwd) == 0) {
                 JOptionPane.showMessageDialog(null, "修改密码成功！");
             } else {
                 JOptionPane.showMessageDialog(null, "修改密码失败！");

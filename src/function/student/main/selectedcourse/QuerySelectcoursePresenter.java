@@ -1,7 +1,9 @@
 package function.student.main.selectedcourse;
 
 import data.CourseX;
+import data.user.Student;
 import db.DBService;
+import user_service.UserService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +16,6 @@ import java.util.Vector;
 public class QuerySelectcoursePresenter {
     private DBService mDBMS = null;
     private Statement mStatement = null;
-    private String sterm = "五";
     private Vector<CourseX> res = new Vector<>();
 
     public QuerySelectcoursePresenter() {
@@ -40,7 +41,7 @@ public class QuerySelectcoursePresenter {
                 "FROM course c," +
                 "teacher t," +
                 "ct a " +
-                "where c.Cterm = '" + sterm + "' " +
+                "where c.Cterm = '" + ((Student) UserService.getInstance().getCurrentUser()).getTerm() + "' " +
                 "AND c.Cno = a.Cno " +
                 "AND a.Tno = t.Tno " +
                 "AND (c.Cname like '%" + key + "%' " +
@@ -73,17 +74,17 @@ public class QuerySelectcoursePresenter {
         return res;
     }
 
-    public int selectcourse(String sno, String cno){
+    public int selectcourse(String sno, String cno) {
         int code = -1;
         try {
             ResultSet rs = mStatement
-                    .executeQuery("select Cno from grade where Sno = '" + sno + "' and Cno = '" + cno +"';");
-            if(!rs.next()){
-                if(mStatement.executeUpdate("update course set Cselected = Cselected + 1 where Cno = '" + cno + "'and Cselected < Ccapacity") > 0){
+                    .executeQuery("select Cno from grade where Sno = '" + sno + "' and Cno = '" + cno + "';");
+            if (!rs.next()) {
+                if (mStatement.executeUpdate("update course set Cselected = Cselected + 1 where Cno = '" + cno + "'and Cselected < Ccapacity") > 0) {
                     code = 0;
                 }
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return code;
