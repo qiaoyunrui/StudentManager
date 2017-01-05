@@ -68,7 +68,7 @@ public class QuerySelectcourseAct extends StackFrame {
                                 if(j == 0){
                                     JOptionPane.showMessageDialog(null,"选课成功");
                                 }else{
-                                    JOptionPane.showMessageDialog(null,"选课失败");
+                                    JOptionPane.showMessageDialog(null,"选课已选");
                                 }
                             }
                         }
